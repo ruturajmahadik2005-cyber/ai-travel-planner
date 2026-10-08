@@ -3,8 +3,16 @@ from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from .models import TravelRequest, ReviewRequest
 from .workflow import start_plan, resume_plan, snapshot
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI(title="AI Travel Planner", version="1.0.0")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def home():
+    return FileResponse("app/templates/index.html")
 
 def view(plan_id: str):
     try: snap = snapshot(plan_id)

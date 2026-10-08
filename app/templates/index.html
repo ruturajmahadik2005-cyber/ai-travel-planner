@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Travel Planner</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-icon">✈</div>
+            <div>
+                <h2>AI Travel Planner</h2>
+                <span>Multi-Agent Travel Intelligence</span>
+            </div>
+        </div>
+
+        <div class="nav-badge">
+            <span class="status-dot"></span>
+            AI Agents Ready
+        </div>
+    </header>
+
+
+    <main class="page-container">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-badge">
+                ✨ Powered by Multi-Agent AI
+            </div>
+
+            <h1>
+                Plan your perfect trip
+                <span>with AI</span>
+            </h1>
+
+            <p>
+                Tell us where you want to go. Our AI research and planning
+                agents will create a personalized itinerary built around
+                your budget, interests and travel dates.
+            </p>
+
+            <div class="workflow-strip">
+
+                <div class="workflow-item">
+                    <div class="workflow-number">1</div>
+                    <div>
+                        <strong>Research Agent</strong>
+                        <span>Live destination research</span>
+                    </div>
+                </div>
+
+                <div class="workflow-line"></div>
+
+                <div class="workflow-item">
+                    <div class="workflow-number">2</div>
+                    <div>
+                        <strong>Planner Agent</strong>
+                        <span>Personalized itinerary</span>
+                    </div>
+                </div>
+
+                <div class="workflow-line"></div>
+
+                <div class="workflow-item">
+                    <div class="workflow-number">3</div>
+                    <div>
+                        <strong>Human Review</strong>
+                        <span>You stay in control</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN FORM -->
+        <section class="planner-card">
+
+            <div class="card-heading">
+                <div>
+                    <span class="eyebrow">START PLANNING</span>
+                    <h2>Where are you heading?</h2>
+                    <p>Enter your travel preferences and let the AI agents do the rest.</p>
+                </div>
+
+                <div class="card-icon">🌍</div>
+            </div>
+
+
+            <form id="travelForm">
+
+                <div class="form-group full-width">
+                    <label for="destination">Destination</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon">📍</span>
+
+                        <input id="destination" type="text" placeholder="e.g. Goa, Paris, Tokyo" required>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+
+                        <input id="startDate" type="date" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+
+                        <input id="endDate" type="date" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="budgetMin">Minimum Budget</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">₹</span>
+
+                            <input id="budgetMin" type="number" min="0" placeholder="20000" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="budgetMax">Maximum Budget</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">₹</span>
+
+                            <input id="budgetMax" type="number" min="1" placeholder="30000" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="travelers">Travelers</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">👥</span>
+
+                            <input id="travelers" type="number" min="1" max="30" value="2" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+
+                        <select id="currency">
+                            <option value="INR" selected>INR — Indian Rupee</option>
+                            <option value="USD">USD — US Dollar</option>
+                            <option value="EUR">EUR — Euro</option>
+                            <option value="GBP">GBP — British Pound</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>Your Interests</label>
+
+                    <p class="field-help">
+                        Select everything you'd like to experience.
+                    </p>
+
+                    <div class="interest-grid">
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="beaches">
+                            <span>🏖️ Beaches</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="local food">
+                            <span>🍜 Local Food</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="culture">
+                            <span>🏛️ Culture</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="nature">
+                            <span>🌿 Nature</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="adventure">
+                            <span>🧗 Adventure</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="nightlife">
+                            <span>🌙 Nightlife</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="photography">
+                            <span>📷 Photography</span>
+                        </label>
+
+                        <label class="interest-option">
+                            <input type="checkbox" value="shopping">
+                            <span>🛍️ Shopping</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" id="generateButton" class="primary-button">
+                    <span>✨</span>
+                    Generate My AI Itinerary
+                    <span>→</span>
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LOADING -->
+        <section id="loadingSection" class="loading-card hidden">
+
+            <div class="ai-loader">
+                <div class="loader-ring"></div>
+                <div class="loader-center">✈</div>
+            </div>
+
+            <h2>AI agents are planning your trip...</h2>
+
+            <p id="loadingMessage">
+                Researching your destination and building the best itinerary.
+            </p>
+
+            <div class="agent-progress">
+
+                <div class="progress-item active">
+                    <span>🔎</span>
+                    <div>
+                        <strong>Research Agent</strong>
+                        <small>Searching destination insights</small>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <span>🧠</span>
+                    <div>
+                        <strong>Planner Agent</strong>
+                        <small>Building your itinerary</small>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <span>👤</span>
+                    <div>
+                        <strong>Human Review</strong>
+                        <small>Waiting for your approval</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ERROR -->
+        <section id="errorBox" class="error-box hidden">
+            <strong>Something went wrong</strong>
+            <p id="errorMessage"></p>
+        </section>
+
+
+        <!-- RESULT -->
+        <section id="resultSection" class="result-section hidden">
+
+            <div class="result-header">
+
+                <div>
+                    <span class="eyebrow">YOUR AI ITINERARY</span>
+                    <h2 id="resultDestination">
+                        Your Travel Plan
+                    </h2>
+
+                    <p>
+                        Generated by our Research and Planner agents.
+                        Review the plan before approving it.
+                    </p>
+                </div>
+
+                <div id="planStatus" class="status-badge">
+                    Awaiting Review
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+            <div class="summary-grid">
+
+                <div class="summary-card">
+                    <span class="summary-icon">📅</span>
+                    <small>Travel Dates</small>
+                    <strong id="summaryDates">—</strong>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-icon">👥</span>
+                    <small>Travelers</small>
+                    <strong id="summaryTravelers">—</strong>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-icon">💰</span>
+                    <small>Budget</small>
+                    <strong id="summaryBudget">—</strong>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-icon">🔄</span>
+                    <small>Revisions</small>
+                    <strong id="summaryRevisions">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- ITINERARY -->
+            <div class="content-card">
+
+                <div class="section-title">
+                    <div class="section-icon">🗺️</div>
+
+                    <div>
+                        <h3>Personalized Itinerary</h3>
+                        <p>Your AI-generated day-by-day travel plan.</p>
+                    </div>
+                </div>
+
+                <div id="itineraryContent" class="itinerary-content"></div>
+
+            </div>
+
+
+            <!-- REVIEW -->
+            <div id="reviewPanel" class="review-card">
+
+                <div class="review-heading">
+                    <div>
+                        <span class="eyebrow">HUMAN-IN-THE-LOOP</span>
+                        <h3>How does this plan look?</h3>
+
+                        <p>
+                            Approve it, ask the planner to revise it,
+                            or request a specific modification.
+                        </p>
+                    </div>
+
+                    <span class="human-badge">👤 Your decision</span>
+                </div>
+
+
+                <div class="review-actions">
+
+                    <button id="approveButton" class="approve-button" type="button">
+                        ✓ Approve Plan
+                    </button>
+
+                    <button id="rejectButton" class="reject-button" type="button">
+                        ↻ Request Revision
+                    </button>
+
+                    <button id="modifyButton" class="modify-button" type="button">
+                        ✎ Modify Plan
+                    </button>
+
+                </div>
+
+
+                <!-- REJECT BOX -->
+                <div id="rejectBox" class="feedback-panel hidden">
+
+                    <label for="rejectFeedback">
+                        What should the AI planner improve?
+                    </label>
+
+                    <textarea id="rejectFeedback"
+                        placeholder="Example: Reduce expensive activities and add more local food experiences."></textarea>
+
+                    <button id="submitReject" class="secondary-action" type="button">
+                        Send Feedback & Regenerate
+                    </button>
+
+                </div>
+
+
+                <!-- MODIFY BOX -->
+                <div id="modifyBox" class="feedback-panel hidden">
+
+                    <label for="modifyField">
+                        What would you like to change?
+                    </label>
+
+                    <input id="modifyField" type="text" placeholder="Example: Day 2 evening">
+
+                    <textarea id="modifyValue"
+                        placeholder="Example: Replace with a relaxed beach sunset and local food experience."></textarea>
+
+                    <button id="submitModify" class="secondary-action" type="button">
+                        Apply Modification
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FINAL APPROVED -->
+            <div id="approvedPanel" class="approved-card hidden">
+
+                <div class="approved-icon">✓</div>
+
+                <div>
+                    <span>TRIP APPROVED</span>
+                    <h3>Your itinerary is ready!</h3>
+                    <p>
+                        The Human-in-the-Loop review is complete
+                        and your final travel plan has been approved.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <div>
+            <strong>AI Travel Planner</strong>
+            <span>Built with FastAPI • LangGraph • Gemini • Serper</span>
+        </div>
+
+        <p>
+            Multi-Agent AI Travel Planning System
+        </p>
+    </footer>
+
+
+    <script src="/static/app.js"></script>
+
+</body>
+
+</html>
