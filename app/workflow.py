@@ -48,12 +48,13 @@ def llm_json(system: str, payload: dict) -> dict | None:
     for attempt in range(3):
         try:
             llm = ChatGoogleGenerativeAI(
-                model=os.getenv(
-                    "GEMINI_MODEL",
-                    "gemini-3.8-flash",
-                ),
-                temperature=0.2,
-            )
+    model=os.getenv(
+        "GEMINI_MODEL",
+        "gemini-3.8-flash",
+    ),
+    temperature=0.2,
+    timeout=20,
+)
 
             response = llm.invoke(
                 [
