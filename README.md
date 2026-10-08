@@ -99,6 +99,24 @@ The reviewer can perform three actions:
 
 After rejection or modification, the revision counter is incremented and a new draft is generated before the workflow pauses again for review.
 
+## Web Interface
+
+The project includes a responsive web interface served directly by FastAPI.
+
+The interface allows users to:
+
+- Enter destination and travel dates
+- Set minimum and maximum budget
+- Select currency and number of travelers
+- Choose travel interests
+- Generate an itinerary
+- Review the generated itinerary
+- Approve the plan
+- Request a revision with feedback
+- Modify a specific part of the itinerary
+
+The interface communicates with the same FastAPI endpoints used by external API clients.
+
 ## API Endpoints
 
 ### Create Plan
@@ -151,6 +169,9 @@ Returns API health status.
 - Requests
 - Uvicorn
 - python-dotenv
+- HTML
+- CSS
+- JavaScript
 
 ## Setup
 
@@ -208,7 +229,7 @@ Never commit `.env` or real API keys to Git.
 uvicorn app.main:app --reload
 ```
 
-API:
+Web interface:
 
 ```text
 http://127.0.0.1:8000
@@ -327,7 +348,7 @@ LangGraph checkpoints are stored locally in:
 travel_planner.db
 ```
 
-This provides durable workflow state across API requests, HITL pauses, and local application restarts.
+This provides durable workflow state across API requests, Human-in-the-Loop pauses, and local application restarts.
 
 The SQLite database is excluded from Git using `.gitignore`.
 
@@ -341,13 +362,15 @@ Temporary service errors such as HTTP `503` are retried with a short delay.
 
 Quota errors such as HTTP `429` are not repeatedly retried.
 
+Gemini requests use a timeout to prevent a network problem from leaving the workflow waiting indefinitely.
+
 If Gemini is unavailable, the application can return a deterministic fallback research result or itinerary so that the API and LangGraph workflow remain functional.
 
 The fallback is intended for graceful degradation and development/testing rather than replacing normal LLM-generated output.
 
 ## Design Decisions and Tradeoffs
 
-The agents are implemented as explicit LangGraph nodes instead of using an opaque autonomous-agent loop. This makes workflow routing, state transitions, revision behavior, and HITL handling easier to inspect and test.
+The agents are implemented as explicit LangGraph nodes instead of using an opaque autonomous-agent loop. This makes workflow routing, state transitions, revision behavior, and Human-in-the-Loop handling easier to inspect and test.
 
 Serper provides the required real-time web research capability.
 
@@ -358,6 +381,8 @@ The Budget Allocator and Packing Assistant are deterministic tools. This makes t
 SQLite was selected for local durable checkpoint persistence because it is lightweight and requires no external database service.
 
 Pydantic validates incoming API requests, including travel dates, budget ranges, traveler counts, and review requirements.
+
+A lightweight web interface is included for easier demonstration of the complete workflow without adding a separate frontend framework.
 
 ## Assumptions
 
@@ -394,23 +419,28 @@ With more development time, the project could include:
 
 ```text
 ai_travel_planner/
-|
-|-- app/
-|   |-- __init__.py
-|   |-- main.py
-|   |-- models.py
-|   |-- tools.py
-|   `-- workflow.py
-|
-|-- .env
-|-- .env.example
-|-- .gitignore
-|-- README.md
-|-- requirements.txt
-`-- travel_planner.db
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models.py
+│   ├── tools.py
+│   ├── workflow.py
+│   ├── static/
+│   │   ├── app.js
+│   │   └── style.css
+│   └── templates/
+│       └── index.html
+├── .env.example
+├── .env                 # Local only - gitignored
+├── travel_planner.db    # Local runtime DB - gitignored
+├── .gitignore
+├── requirements.txt
+└── README.md
 ```
 
-`.env`, `.venv`, Python cache files, and the local SQLite database are excluded from Git.
+> `.env` and `travel_planner.db` are local runtime files and are excluded from Git using `.gitignore`.
+
+The virtual environment, Python cache files, and other generated local files are also excluded from Git.
 
 ## Security
 
@@ -418,7 +448,7 @@ Secrets are loaded from environment variables using `python-dotenv`.
 
 Real API keys must never be placed in:
 
-- source code
+- Source code
 - README
 - `.env.example`
 - Git commits
@@ -438,9 +468,10 @@ This project demonstrates:
 - Approve, reject, and modify workflows
 - Durable SQLite state persistence
 - FastAPI REST endpoints
+- Responsive web interface
 - Input validation
 - Graceful external API failure handling
+
 ## Author
 
 **Ruturaj Mahadik**
-
