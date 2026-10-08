@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.DS_Store
+travel_planner.db
+travel_planner.db-shm
+travel_planner.db-wal
